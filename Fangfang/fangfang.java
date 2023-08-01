@@ -57,23 +57,27 @@ public class fangfang {
         System.out.print("수정할 정보 id를 입력해주세요.\n명령) ");
         int del = Integer.parseInt(sc.nextLine().trim());
 
-        System.out.println("명언(기존) : " + mk.get(del-1).getSaying());
-        System.out.print("명언 : ");
-        String updatesaying = sc.nextLine();
-
-        System.out.println("작가(기존) : " + mk.get(del-1).getWriter());
-        System.out.print("작가 : ");
-        String updatewriter = sc.nextLine();
-
         try {
+            System.out.println("명언(기존) : " + mk.get(del-1).getSaying());
+            System.out.print("명언 : ");
+            String updatesaying = sc.nextLine();
+
+            System.out.println("작가(기존) : " + mk.get(del-1).getWriter());
+            System.out.print("작가 : ");
+            String updatewriter = sc.nextLine();
+
             for (int i = 0; i < mk.size(); i++) {
-                if (mk.get(i).getId() == del) {
-                    mk.get(i).setSaying(updatesaying);
-                    mk.get(i).setWriter(updatewriter);
+                if (mk.get(i) != null) {
+                    if (mk.get(i).getId() == del) {
+                        mk.get(i).setSaying(updatesaying);
+                        mk.get(i).setWriter(updatewriter);
+                    }
                 }
             }
         } catch (NullPointerException e) {
-            System.out.println("ㅇㄹㅇㄹㅇ");
+            System.out.println("명언이 존재하지 않습니다.");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("명언이 존재하지 않습니다.");
         }
 
     }
@@ -89,7 +93,7 @@ public class fangfang {
 
             MrkimEntity inmk = new MrkimEntity(in, insertsaying, insertwriter);
 
-            mk.add(in - 1, inmk);
+            mk.set(in - 1, inmk);
         }
     }
 }
